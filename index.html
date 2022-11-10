@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enyutin Website</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="container">
+          <a class="logo">
+            <img src="images/Logo.png">
+          </a>
+          <div class="nav-toggle"><span></span></div>
+          <ul id="menu">
+            <li><a href="https://vk.com/vasiliyenyutin">Блог</a></li>
+            <li><a href="https://vk.com/vasiliyenyutin">Контакты</a></li>
+            <li><a href="https://vk.com/vasiliyenyutin">Об авторе</a></li>
+          </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="posts-list">
+          <article id="post-1" class="post">
+            <div class="post-image"><a name="lab_2"><img src="images/Lab_2.png"></a></div>
+            <div class="post-content">
+              <h2 class="post-title">Работа 2 "Анимация"</h2>
+              <p>Анимирование посредством HTML и CSS.</p>
+              <div class="post-footer">
+                <a class="more-link" href="lab2.html" target="_blank">Пример работы "анимация"</a>
+              </div>
+            </div>
+          </article>
+          <article id="post-1" class="post">
+            <div class="post-image"><a name="lab_1"><img src="images/Lab_1.png"></a></div>
+            <div class="post-content">
+              <h2 class="post-title">Работа 1 "Рисунок"</h2>
+              <p>Создание рисунка с помощью примитивов посредством HTML и CSS.</p>
+              <div class="post-footer">
+                <a class="more-link" href="lab1.html" target="_blank">Пример работы "рисунок"</a>
+              </div>
+            </div>
+          </article>
+        </div>
+        
+        <aside>
+            <div class="widget">
+              <h3 class="widget-title">Последние записи</h3>
+              <ul class="widget-posts-list">
+                <li>
+                  <div class="post-image-small">
+                    <a href="#lab_2"><img src="images/Lab_2.png"></a>
+                  </div>
+                  <h4 class="widget-post-title">Анимация</h4>
+                </li>
+                <li>
+                  <div class="post-image-small">
+                    <a href="#lab_1"><img src="images/Lab_1.png"></a>
+                  </div>
+                  <h4 class="widget-post-title">Рисунок</h4>
+                </li>
+              </ul>
+            </div>
+          </aside>
+    </div>
+
+    <footer>
+        <div class="container">
+          <div class="footer-col">Енютин Василий | 3530903/00301</div>
+        </div>
+    </footer>
+
+      <script>
+      $('.nav-toggle').on('click', function(){
+      $('#menu').toggleClass('active');
+      });
+      </script>
+</body>
+</html>
+    

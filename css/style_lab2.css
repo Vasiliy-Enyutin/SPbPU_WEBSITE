@@ -1,0 +1,158 @@
+.container
+{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.intro
+{
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background-color: cadetblue;
+}
+
+.student_info
+{
+    font-size: 30px;
+    text-align: center;
+}
+
+.section
+{
+    width: 100%;
+    height: 100vh;
+
+    padding-top: 15%;
+
+    background-color: #b4d2b1;
+}
+
+.content
+{
+	position: absolute;
+    width: 200px;
+    height: 200px;
+	background-image: url("../images/toy1.jpg");
+	background-size: cover;
+
+	left: 100px;
+    top: 800px;
+
+    border: 3px solid black;
+}
+
+.boy1 
+{
+	opacity: 0;
+    position: absolute;
+	height: 150px;
+	top: 60px;
+	transition: transform 1s ease-out;
+}
+
+.boy2
+{
+	opacity: 0;
+    position: absolute;
+	height: 150px;
+	top: 60px;
+	left: 110px;
+	transition: transform 1s ease-out;
+}
+
+.toy_stick
+{
+	opacity: 0;
+	height: 70px;
+	top: 90px;
+	left: 95px;
+    position: absolute;
+	transition: transform 1s ease-out;
+}
+
+.toy_spinner
+{
+	opacity: 0;
+	height: 60px;
+	top: 60px;
+	left: 83px;
+    position: absolute;
+	transition: transform 1s ease-out;
+}
+
+.text1
+{
+	opacity: 0;
+	position: absolute;
+	top: 160px;
+	left: 10px;
+	color: white;
+}
+
+.text2
+{
+	opacity: 0;
+	position: absolute;
+	top: 20px;
+	left: -10px;
+	color: greenyellow;
+	transform: rotate(-30deg);
+}
+
+.pointer_down:hover .boy1
+{
+	opacity: 1;
+    transform: translate(110px, 0px);
+}
+
+.pointer_down:hover .text1
+{
+	opacity: 1;
+}
+
+.pointer_down:active .boy1
+{
+	opacity: 0;
+}
+
+.pointer_down:active .text1
+{
+	opacity: 0;
+}
+
+.pointer_down:active .boy2
+{
+	opacity: 1;
+}
+
+.pointer_down:active .toy_stick
+{
+	opacity: 1;
+}
+
+@keyframes moving 
+{
+    100% {transform: rotate(-360deg);}
+}
+
+.pointer_down:active .toy_spinner
+{
+	opacity: 1;
+	animation: moving 3s infinite linear;
+}
+
+.pointer_down:active .text2
+{
+	opacity: 1;
+}
+
+.pointer_down:active .content
+{
+	filter: sepia(50%);	
+}
