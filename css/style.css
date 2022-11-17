@@ -51,6 +51,11 @@
 	display: block;
 	float: left;
  }
+
+ .name {
+	font-size: 20px;
+ }
+
  #menu {
 	float: right;
  }
