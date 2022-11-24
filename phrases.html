@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="phrases.css">
+
+    <title>Enyutin "phrases"</title>
+
+    <script src="js/phrases.js"></script>
+</head>
+<body onload="initial()">
+    <div class="contentContainer">
+      <div id="content">
+        <div id="phrasesEnded">Фразы закончились</div>
+            <button id="createButton" type="button" onclick="spawnPhrase()">
+                Создать фразу
+            </button>
+            <button id="colorButton" type="button" onclick="colorUnmovedPhrases()">
+                Перекрасить фразу
+            </button>
+      </div>
+    </div>
+</body>
+</html>
