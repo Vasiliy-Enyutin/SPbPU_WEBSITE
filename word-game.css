@@ -56,13 +56,20 @@ body
 {
     display: flex;
     justify-content: center;
+    background-color: yellow;	
+}
+
+#resultContainer
+{
+    display: none;
+    justify-content: center;
     background-color: #F4A460;	
 }
 
 .phrase 
 {
-    width: 100px;
-    height: 50px;
+    width: 80px;
+    height: 30px;
     position: absolute;
     text-align: center;
     display: flex;
