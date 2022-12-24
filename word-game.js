@@ -56,6 +56,7 @@ var digitOnScreen;  // Текущая цифра на экране
 var foundNounsNumber = 0;
 var totalNounsNumber = 0;
 var clickedPhrasesNumber = 0;
+var digitIsClicked = false;
 
 function checkName()
 {
@@ -73,14 +74,17 @@ function checkName()
 
 async function startNextGame()
 {
-    clearInterval(currentTimerId);
     currentGameStep++;
-
+    clearInterval(currentTimerId);
     document.getElementById("resultContainer").style.display = "flex";
     resultContainer.innerHTML = "Вы победили и заработали " + currentUserPoints + " очков";
     await wait(2000);
     document.getElementById("resultContainer").style.display = "none";
-    startGame();
+    
+    if (currentGameStep >= 3)
+        openRatingTable();
+    else
+        startGame();
 }
 
 function configure() 
@@ -110,11 +114,16 @@ function startGame()
     else
         globalUserPoints = 0;
     updateGlobalPoints();
+    clearFields();
+    console.log("global points: " + globalUserPoints);
+    console.log("current points: " + currentUserPoints);
+    console.log("found nouns number: " + foundNounsNumber);
+    console.log("total nouns number: " + totalNounsNumber);
+    console.log("total nouns number: " + totalNounsNumber);
 
     chooseGame();
     
     updateGameTask();
-    currentUserPoints = 0;
     updatePointsCounter();
 }
 
@@ -275,6 +284,7 @@ function hideShowDigits()
 
 function showDigit(phrase)
 {
+    digitIsClicked = false;
     digitOnScreen = phrase.element.innerText;
     phrase.element.style.display = "flex";
 }
@@ -286,7 +296,7 @@ function hideDigit(phrase)
 
 function checkForWinInDigitGame(startSpawnedPhrasesNumber)
 {
-    if (spawnedPhrases.length == startSpawnedPhrasesNumber)
+    if (spawnedPhrases.length == startSpawnedPhrasesNumber || currentUserPoints <= 0)
     {
         lose();
     }
@@ -301,28 +311,36 @@ function checkForWinInDigitGame(startSpawnedPhrasesNumber)
 // Нажатие клавиши для игры с исчезающими цифрами
 document.addEventListener('keydown', function(event) 
 {
-    if 
-    (
-        (event.code == 'Digit0' && digitOnScreen == 0) || (event.code == 'Digit1' && digitOnScreen == 1) ||
-        (event.code == 'Digit2' && digitOnScreen == 2) || (event.code == 'Digit3' && digitOnScreen == 3) ||
-        (event.code == 'Digit4' && digitOnScreen == 4) || (event.code == 'Digit5' && digitOnScreen == 5) ||
-        (event.code == 'Digit6' && digitOnScreen == 6) || (event.code == 'Digit7' && digitOnScreen == 7) ||
-        (event.code == 'Digit8' && digitOnScreen == 8) || (event.code == 'Digit9' && digitOnScreen == 9)
-    )
+    if (currentGameStep == 1 && digitIsClicked == false)
     {
-        for (let i = 0; i < spawnedPhrases.length; i++)
+        if 
+        (
+            (event.code == 'Digit0' && digitOnScreen == 0) || (event.code == 'Digit1' && digitOnScreen == 1) ||
+            (event.code == 'Digit2' && digitOnScreen == 2) || (event.code == 'Digit3' && digitOnScreen == 3) ||
+            (event.code == 'Digit4' && digitOnScreen == 4) || (event.code == 'Digit5' && digitOnScreen == 5) ||
+            (event.code == 'Digit6' && digitOnScreen == 6) || (event.code == 'Digit7' && digitOnScreen == 7) ||
+            (event.code == 'Digit8' && digitOnScreen == 8) || (event.code == 'Digit9' && digitOnScreen == 9)
+        )
         {
-            if (spawnedPhrases[i].element.innerText == digitOnScreen)
+            for (let i = 0; i < spawnedPhrases.length; i++)
             {
-                spawnedPhrases[i].changeColor(clickedColor);
-                setTimeout(deletePhrase, 1000, spawnedPhrases[i]);
-                addPoints(pointsIncreaserMedium);
+                if (spawnedPhrases[i].element.innerText == digitOnScreen)
+                {
+                    digitIsClicked = true;
+                    spawnedPhrases[i].changeColor(clickedColor);
+                    setTimeout(deletePhrase, 1000, spawnedPhrases[i]);
+                    addPoints(pointsIncreaserMedium);
+                }
             }
+        }
+        else
+        {
+            addPoints(-pointsIncreaserMedium);
         }
     }
 });
 
-function spawnPhrases(dictionary) // принимает массив со словами из-за разных игр
+function spawnPhrases(dictionary) // Игра 0
 {
     let positionTop = 0;
     let positionTopIncreaser = 6;
@@ -498,6 +516,15 @@ function updateGameTask()
         gameTaskContainer.innerText = "Задание: нажимать кнопки на клавиатуре в соответствии с показанными на экране символами"
     else if (currentGameStep == 2)
         gameTaskContainer.innerText = "Задание: выбрать ТОЛЬКО СУЩЕСТВИТЕЛЬНЫЕ"
+}
+
+function clearFields()
+{
+    foundNounsNumber = 0;
+    totalNounsNumber = 0;
+    clickedPhrasesNumber = 0;
+    currentUserPoints = 0;
+    digitIsClicked = false;
 }
 
 function exit()
