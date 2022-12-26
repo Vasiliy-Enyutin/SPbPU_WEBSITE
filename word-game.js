@@ -7,7 +7,12 @@ const synonymsDictionary =
     "Лицо": "Морда",
     "Супруга": "Жена",
     "Ходить": "Слоняться",
-    "Выговор": "Порицание"
+    "Выговор": "Порицание",
+    "Анализ": "Разбор",
+    "Габариты": "Размеры",
+    "Голкипер": "Вратарь",
+    "Дискуссия": "Спор",
+    "Имидж": "Образ"
 };
 
 const digitsArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
@@ -115,11 +120,6 @@ function startGame()
         globalUserPoints = 0;
     updateGlobalPoints();
     clearFields();
-    console.log("global points: " + globalUserPoints);
-    console.log("current points: " + currentUserPoints);
-    console.log("found nouns number: " + foundNounsNumber);
-    console.log("total nouns number: " + totalNounsNumber);
-    console.log("total nouns number: " + totalNounsNumber);
 
     chooseGame();
     
@@ -344,7 +344,7 @@ function spawnPhrases(dictionary) // Игра 0
 {
     let positionTop = 0;
     let positionTopIncreaser = 6;
-    for (let i = 0; i < Object.keys(dictionary).length * 2; i++)
+    for (let i = 0; i < Object.keys(dictionary).length; i++)
     {
         let phraseElement = getPhraseElement(positionTop);
         let phrase = new Phrase(phraseElement);
@@ -354,11 +354,25 @@ function spawnPhrases(dictionary) // Игра 0
     }
 
     let counter = 0;
+    let phraseLimit = 10;
     let randomNumbers = generateArrayRandomNumbers(0, spawnedPhrases.length - 1)   // Для выбора рандомной фразы
-    for (const [key, value] of Object.entries(dictionary))  // Устанавливаю текст фразы
+    // for (const [key, value] of Object.entries(dictionary))  // Устанавливаю текст фразы
+    // {
+    //     if (counter >= phraseLimit)
+    //         break;
+    //     spawnedPhrases[randomNumbers[counter++]].setText(key);
+    //     spawnedPhrases[randomNumbers[counter++]].setText(value);
+    // }
+    let phrase;
+    for(let i = 0; i < Object.keys(dictionary).length; i++)
     {
-        spawnedPhrases[randomNumbers[counter++]].setText(key);
-        spawnedPhrases[randomNumbers[counter++]].setText(value);
+        if (counter >= phraseLimit)
+            break;
+        phrase = Object.keys(dictionary)[randomNumbers[counter]];
+        spawnedPhrases[randomNumbers[counter]].setText(phrase);
+        counter++;
+        spawnedPhrases[randomNumbers[counter]].setText(dictionary[phrase]);
+        counter++;
     }
 }
 
@@ -593,7 +607,6 @@ function showRatingTable()
 
 function clearBord()
 {
-    console.log(spawnedPhrases);
     spawnedPhrases.find(phrase => phrase.element.remove());
     spawnedPhrases.splice(0, spawnedPhrases.length);
 }
